@@ -1,0 +1,31 @@
+
+.SUBDIRS: images
+
+LATEX = platex -interaction=batchmode
+DVIPDFM = dvipdfmx
+DVIPDFMFLAGS = -r 2400 -z 0 -f kozuka.map
+
+TARGET = report
+
+#
+# PHONY rules
+#
+
+.PHONY: clean clobber build
+
+clean:
+  rm -f *.aux *.log *.bbl *.toc *.nav *.fls *.out *.snm *.vrb *.dvi *.blg
+
+clobber: clean
+  rm -f *.pdf
+
+build: $(TARGET).dvi $(TARGET).pdf
+
+
+#
+# Document generation rules
+#
+
+LaTeXDocument($(TARGET), $(TARGET))
+
+.DEFAULT: build
