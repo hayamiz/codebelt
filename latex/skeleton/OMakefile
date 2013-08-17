@@ -1,9 +1,8 @@
-
 .SUBDIRS: images
 
 LATEX = platex -interaction=batchmode
 DVIPDFM = dvipdfmx
-DVIPDFMFLAGS = -r 2400 -z 0 -f kozuka.map
+DVIPDFMFLAGS = -r 2400 -z 0 -f font.map
 
 TARGET = report
 
@@ -19,8 +18,12 @@ clean:
 clobber: clean
   rm -f *.pdf
 
+.SCANNER: scan-svg-images: $(TARGET).tex
+  println($(TARGET).dvi: $(string $(replacesuffixes .svg, .eps, $(ls i, images/*.svg))))
+
 build: $(TARGET).dvi $(TARGET).pdf
 
+$(TARGET).dvi: :scanner: scan-svg-images
 
 #
 # Document generation rules

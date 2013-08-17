@@ -4,8 +4,47 @@
 
 \usepackage{amsmath,ascmac}
 \usepackage{graphicx}
+\usepackage{listings}
 
-\title{The \LaTeX skeleton}
+\newcommand{\listingsize}{\small}
+\lstset{language = C,
+morekeywords={},
+numbers = left,
+numberstyle = {\tiny},
+numbersep = 12pt,
+breaklines = false,
+breakindent = 40pt,
+flexiblecolumns = true,
+keepspaces = false,
+basicstyle = \listingsize,
+identifierstyle = \itshape\listingsize,
+commentstyle = \fontfamily{ptm}\selectfont\listingsize,
+stringstyle = \listingsize,
+tabsize = 4,
+escapechar = |,
+xleftmargin = 30pt,
+xrightmargin = 25pt,
+frame = single,
+framexleftmargin = 20pt,
+numbers = left,
+}
+
+
+%%%%%%%%%%%%%%%%%%
+%%%   Layout   %%%
+%%%%%%%%%%%%%%%%%%
+
+\setlength{\topmargin}{-20mm}
+% \setlength{\oddsidemargin}{-5mm}
+\setlength{\textheight}{250mm}
+% \setlength{\textwidth}{175mm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   Document info   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{The \LaTeX \ skeleton}
 \author{Yuto HAYAMIZU}
 
 \begin{document}
@@ -13,6 +52,16 @@
 \maketitle
 
 hello world
+
+\begin{lstlisting}[caption=hoge.c]
+int main(int argc, char **argv){
+    puts("hello world");
+    return 0;
+}
+\end{lstlisting}
+
+\bibliographystyle{unsrt}
+\bibliography{report}
 
 \end{document}
 
