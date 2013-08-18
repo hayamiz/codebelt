@@ -1,10 +1,27 @@
 .SUBDIRS: images
 
-LATEX = platex -interaction=batchmode
+###
+### Main document filename (without .tex)
+###
+
+TARGET = report
+
+#
+# Setup global variables
+#
+
+if $(which platex)
+  LATEX = platex -interaction=batchmode
+  export
 DVIPDFM = dvipdfmx
 DVIPDFMFLAGS = -r 2400 -z 0 -f font.map
 
-TARGET = report
+if $(which pbibtex)
+  global.BIBTEX = pbibtex
+  export
+elseif $(which jbibtex)
+  global.BIBTEX = jbibtex
+  export
 
 #
 # PHONY rules
@@ -18,12 +35,21 @@ clean:
 clobber: clean
   rm -f *.pdf
 
-.SCANNER: scan-svg-images: $(TARGET).tex
-  println($(TARGET).dvi: $(string $(replacesuffixes .svg, .eps, $(ls i, images/*.svg))))
-
 build: $(TARGET).dvi $(TARGET).pdf
 
+
+#
+# Scanners
+#
+
+.SCANNER: scan-svg-images: $(TARGET).tex $(ls i, *.tex)
+  println($(TARGET).dvi: $(string $(replacesuffixes .svg, .eps, $(ls i, images/*.svg))))
+
+# .SCANNER: scan-ai-images: $(TARGET).tex
+#   println($(TARGET).dvi: $(string $(replacesuffixes .ai, .eps, $(ls i, images/*.ai))))
+
 $(TARGET).dvi: :scanner: scan-svg-images
+# $(TARGET).dvi: :scanner: scan-ai-images
 
 #
 # Document generation rules
