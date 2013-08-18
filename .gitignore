@@ -1,4 +1,9 @@
-/.DS_Store
-/latex/skeleton/.omakedb
-/latex/skeleton/.omakedb.lock
-/latex/skeleton/report.pdf
+.DS_Store
+.omakedb
+.omakedb.lock
+OMakefile.omc
+OMakeroot.omc
+images/OMakefile.omc
+*.aux
+*.dvi
+*.log
