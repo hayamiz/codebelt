@@ -57,4 +57,16 @@ $(TARGET).dvi: :scanner: scan-svg-images
 
 LaTeXDocument($(TARGET), $(TARGET))
 
+#
+# Aux files
+#
+
+# uncompress PDF if there is pdftk
+if $(which pdftk)
+  # echo(pdftk is available)
+  $(TARGET).uncomp.pdf: $(TARGET).pdf
+    pdftk $< output $@ uncompress
+  build: $(TARGET).uncomp.pdf
+
+
 .DEFAULT: build
